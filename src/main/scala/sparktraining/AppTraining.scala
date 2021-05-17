@@ -6,7 +6,7 @@ object AppTraining extends App {
 //  println("Hello")
     val spark = SparkSession
       .builder()
-      .appName("SparkTraining")
+      .appName("AirlineDelay")
       .getOrCreate()
 
     val df = spark.read.csv(args(0))

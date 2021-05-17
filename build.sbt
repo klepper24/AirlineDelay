@@ -1,4 +1,4 @@
-name := "SparkTraining"
+name := "AirlineDelay"
 
 version := "0.1"
 
