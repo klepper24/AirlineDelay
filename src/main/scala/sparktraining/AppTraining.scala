@@ -12,12 +12,8 @@ object AppTraining extends App {
 
     implicit val sc: SparkContext = spark.sparkContext
 
-    val df = spark.read.csv(args(0))
-
-    val aggs = new AirLineDelayAggs()
-
     val count = 10
-    val delays: Dataset[AirLineDelay] = ???
+    val delays: Dataset[AirLineDelay] = AirlineDelaysReader.read(args(0))
 
-    aggs.topNCarriers(delays)(count, ascending = true)
+    AirLineDelayAggs.topNCarriers(delays)(count, ascending = true)
 }
