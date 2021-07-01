@@ -10,7 +10,7 @@ object AppTraining extends App {
       .appName("AirlineDelay")
       .getOrCreate()
 
-    implicit val sc: SparkContext = spark.sparkContext
+    private implicit val sparkSession: SparkSession = spark
 
     val count = 10
     val delays: Dataset[AirLineDelay] = AirlineDelaysReader.read(args(0))
