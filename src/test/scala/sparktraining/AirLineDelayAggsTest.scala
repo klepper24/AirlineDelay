@@ -1,15 +1,11 @@
 package sparktraining
 
-import java.io.File
 import com.holdenkarau.spark.testing.DatasetSuiteBase
-import org.apache.spark.SparkContext
 import org.apache.spark.sql.{Dataset, SparkSession}
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
-import sparktraining.AppTraining.sparkSession
+import org.scalatest.{Matchers, WordSpec}
 import sparktraining.model.AirLineDelay
 
-class AirLineDelayAggsTest extends AnyWordSpec with Matchers with DatasetSuiteBase {
+class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
 
     "AirLineDelayAggs" should {
         "calculate top N carriers" in {
