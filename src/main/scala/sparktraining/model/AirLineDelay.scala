@@ -1,3 +1,6 @@
 package sparktraining.model
 
-case class AirLineDelay(sourceAirport: String, destinationAirport: String, delay: Double)
+case class AirLineDelay(carrier: String,
+                        sourceAirport: String,
+                        destinationAirport: String,
+                        delay: Double)

@@ -3,11 +3,11 @@ package sparktraining
 import com.holdenkarau.spark.testing.DatasetSuiteBase
 import org.apache.spark.sql.Dataset
 import org.scalatest.{Matchers, WordSpec}
-import sparktraining.model.AirLineDelay
+import sparktraining.model.{AirLineDelay, CarrierDelayStats}
 
 
 class AirlineDelaysReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
-    
+
     "AirlineDelaysReader" should {
         "read delays csv file into dataset" in {
             import spark.implicits._
@@ -21,14 +21,16 @@ class AirlineDelaysReaderTest extends WordSpec with Matchers with DatasetSuiteBa
             // then
             val ds = sc.parallelize(
                 Seq(
-                    AirLineDelay("DCA", "EWR", 4.0),
-                    AirLineDelay("EWR", "IAD", -8.0),
-                    AirLineDelay("EWR", "DCA", -9.0),
-                    AirLineDelay("DCA", "EWR", -12.0),
-                    AirLineDelay("IAD", "EWR", -38.0)
+                    CarrierDelayStats("US", -10.0, -10.0),//, -10.0, -10.0),
+                    CarrierDelayStats("OO", 0.0, -5.0),//, -2.5, -2.5),
+                    CarrierDelayStats("EV", -27.0, -33.0),//, -30.0, -30.0),
+                    CarrierDelayStats("YV", -2.0, -2.0),//, -2.0, -2.0),
+                    CarrierDelayStats("FL", -4.0, -4.0),//, -4.0, -4.0),
+                    CarrierDelayStats("XE", 17.0, 17.0),//, 17.0, 17.0),
+                    CarrierDelayStats("9E", -9.0, -9.0)//, -9.0, -9.0)
                 )
             )
-            val expectedDs = ds.toDF().as[AirLineDelay]
+            val expectedDs = ds.toDF().as[CarrierDelayStats]
 
             assertDatasetEquals(delays, expectedDs)
         }

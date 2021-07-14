@@ -10,6 +10,7 @@ object AirlineDelaysReader {
         import spark.implicits._
 
         val customSchema = StructType(Array(
+            StructField("OP_CARRIER", StringType, nullable = false),
             StructField("ORIGIN", StringType, nullable = false),
             StructField("DEST", StringType, nullable = false),
             StructField("ARR_DELAY", DoubleType, nullable = false))
@@ -21,6 +22,7 @@ object AirlineDelaysReader {
           .option("delimiter",";")
           .schema(customSchema)
           .csv(path)
+          .withColumnRenamed("OP_CARRIER", "carrier")
           .withColumnRenamed("ORIGIN", "sourceAirport")
           .withColumnRenamed("DEST", "destinationAirport")
           .withColumnRenamed("ARR_DELAY", "delay")
