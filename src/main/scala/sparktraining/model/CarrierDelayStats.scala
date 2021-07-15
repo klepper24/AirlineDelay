@@ -2,9 +2,9 @@ package sparktraining.model
 
 case class CarrierDelayStats(carrier: String,
                              minDelay: Double,
-                             maxDelay: Double
+                             maxDelay: Double,
+                             avgDelay: Double
                              /*,
-                             avgDelay: Double,
                              medianDelay: Double
                              */
                             )

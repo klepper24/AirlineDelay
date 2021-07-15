@@ -21,16 +21,19 @@ class AirlineDelaysReaderTest extends WordSpec with Matchers with DatasetSuiteBa
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("US", -10.0, -10.0),//, -10.0, -10.0),
-                    CarrierDelayStats("OO", 0.0, -5.0),//, -2.5, -2.5),
-                    CarrierDelayStats("EV", -27.0, -33.0),//, -30.0, -30.0),
-                    CarrierDelayStats("YV", -2.0, -2.0),//, -2.0, -2.0),
-                    CarrierDelayStats("FL", -4.0, -4.0),//, -4.0, -4.0),
-                    CarrierDelayStats("XE", 17.0, 17.0),//, 17.0, 17.0),
-                    CarrierDelayStats("9E", -9.0, -9.0)//, -9.0, -9.0)
+                    AirLineDelay("US", "ABE", "CLT", -10.01),
+                    AirLineDelay("OO", "ABE", "ORD", 0.0),
+                    AirLineDelay("EV", "ABE", "ATL", -27.0),
+                    AirLineDelay("EV", "ABE", "ATL", -33.0),
+                    AirLineDelay("YV", "ABE", "ORD", -2.0),
+                    AirLineDelay("OO", "ABE", "ORD", -5.0),
+                    AirLineDelay("FL", "ABE", "MCO", -4.0),
+                    AirLineDelay("YV", "ABE", "ORD", -2.0),
+                    AirLineDelay("XE", "ABE", "CLE", 17.0),
+                    AirLineDelay("9E", "ABE", "DTW", -9.0)
                 )
             )
-            val expectedDs = ds.toDF().as[CarrierDelayStats]
+            val expectedDs = ds.toDF().as[AirLineDelay]
 
             assertDatasetEquals(delays, expectedDs)
         }
