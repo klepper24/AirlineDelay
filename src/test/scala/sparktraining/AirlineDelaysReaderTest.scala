@@ -21,7 +21,7 @@ class AirlineDelaysReaderTest extends WordSpec with Matchers with DatasetSuiteBa
             // then
             val ds = sc.parallelize(
                 Seq(
-                    AirLineDelay("US", "ABE", "CLT", -10.01),
+                    AirLineDelay("US", "ABE", "CLT", -10.0),
                     AirLineDelay("OO", "ABE", "ORD", 0.0),
                     AirLineDelay("EV", "ABE", "ATL", -27.0),
                     AirLineDelay("EV", "ABE", "ATL", -33.0),

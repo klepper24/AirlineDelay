@@ -22,11 +22,11 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("EV", -33.0, -27.0, -30.0),//, -30.0),
-                    CarrierDelayStats("US", -10.0, -10.0, -10.0),//, -10.0),
-                    CarrierDelayStats("9E", -9.0, -9.0, -9.0),//, -9.0)
-                    CarrierDelayStats("FL", -4.0, -4.0, -4.0),//, -4.0),
-                    CarrierDelayStats("OO", -5.0, 0.0, -2.5)//, -2.5),
+                    CarrierDelayStats("EV", -33.0, -27.0, -30.0, -30.0),
+                    CarrierDelayStats("US", -10.0, -10.0, -10.0, -10.0),
+                    CarrierDelayStats("9E", -9.0, -9.0, -9.0, -9.0),
+                    CarrierDelayStats("FL", -4.0, -4.0, -4.0, -4.0),
+                    CarrierDelayStats("OO", -5.0, 0.0, -2.5, -2.5),
                 )
             )
 
@@ -49,13 +49,13 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("EV", -33.0, -27.0, -30.0),//, -30.0),
-                    CarrierDelayStats("US", -10.0, -10.0, -10.0),//, -10.0),
-                    CarrierDelayStats("9E", -9.0, -9.0, -9.0),//, -9.0)
-                    CarrierDelayStats("FL", -4.0, -4.0, -4.0),//, -4.0),
-                    CarrierDelayStats("OO", -5.0, 0.0, -2.5),//, -2.5),
-                    CarrierDelayStats("YV", -2.0, -2.0, -2.0),//, -2.0),
-                    CarrierDelayStats("XE", 17.0, 17.0, 17.0)//, 17.0),
+                    CarrierDelayStats("EV", -33.0, -27.0, -30.0, -30.0),
+                    CarrierDelayStats("US", -10.0, -10.0, -10.0, -10.0),
+                    CarrierDelayStats("9E", -9.0, -9.0, -9.0, -9.0),
+                    CarrierDelayStats("FL", -4.0, -4.0, -4.0, -4.0),
+                    CarrierDelayStats("OO", -5.0, 0.0, -2.5, -2.5),
+                    CarrierDelayStats("YV", -2.0, -2.0, -2.0, -2.0),
+                    CarrierDelayStats("XE", 17.0, 17.0, 17.0, 17.0),
                 )
             )
 
@@ -78,8 +78,8 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("XE", 17.0, 17.0, 17.0),//, 17.0),
-                    CarrierDelayStats("YV", -2.0, -2.0, -2.0)//, -2.0),
+                    CarrierDelayStats("XE", 17.0, 17.0, 17.0, 17.0),
+                    CarrierDelayStats("YV", -2.0, -2.0, -2.0, -2.0),
                 )
             )
 
@@ -87,5 +87,6 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
 
             assertDatasetEquals(top_n, expectedDs)
         }
+
     }
 }

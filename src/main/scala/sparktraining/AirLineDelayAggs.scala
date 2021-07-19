@@ -1,10 +1,24 @@
 package sparktraining
 
-import org.apache.spark.sql.{Dataset, SparkSession}
+import org.apache.spark.sql.{Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
 import sparktraining.model.{AirLineDelay, CarrierDelayStats}
 
 object AirLineDelayAggs {
+
+    def getDelayMedian = (delayList: Seq[Double]) => {
+      val count = delayList.size
+      val sortedDelayList = delayList.sortWith(_ < _)
+      if (count % 2 == 0) {
+        val l = count / 2 - 1
+        val r = l + 1
+        (sortedDelayList(l) + sortedDelayList(r)) / 2
+      } else
+        sortedDelayList(count / 2)
+    }
+
+    val calculateMedian =  udf(getDelayMedian)
+
 
     def topNCarriers(delays: Dataset[AirLineDelay])
                     (n: Int, ascending: Boolean)
@@ -16,8 +30,10 @@ object AirLineDelayAggs {
           .agg(
               min($"delay").alias("minDelay"),
               max($"delay").alias("maxDelay"),
-              avg($"delay").alias("avgDelay")
-          )
+              avg($"delay").alias("avgDelay"),
+              collect_list($"delay").alias("carrierDelays"))
+          .withColumn("medianDelay", calculateMedian($"carrierDelays"))
+          .drop("carrierDelays")
           .orderBy(if (ascending) $"avgDelay".asc else $"avgDelay".desc)
           .limit(n)
           .as[CarrierDelayStats]
