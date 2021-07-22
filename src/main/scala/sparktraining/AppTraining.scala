@@ -14,5 +14,7 @@ object AppTraining extends App {
     val count = 10
     val delays: Dataset[AirLineDelay] = AirlineDelaysReader.read(args(0))
 
-    AirLineDelayAggs.topNCarriers(delays)(count, ascending = true)
+    val results = AirLineDelayAggs.topNCarriers(delays)(count, ascending = true)
+
+    results.write.csv(args(1))
 }
