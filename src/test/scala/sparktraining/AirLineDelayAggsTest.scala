@@ -22,7 +22,7 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("EV", -33.0, -27.0, -30.0, -30.0),
+                    CarrierDelayStats("EV", -180.0, -27.0, -80.0, -33.0),
                     CarrierDelayStats("US", -10.0, -10.0, -10.0, -10.0),
                     CarrierDelayStats("9E", -9.0, -9.0, -9.0, -9.0),
                     CarrierDelayStats("FL", -4.0, -4.0, -4.0, -4.0),
@@ -49,7 +49,7 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
             // then
             val ds = sc.parallelize(
                 Seq(
-                    CarrierDelayStats("EV", -33.0, -27.0, -30.0, -30.0),
+                    CarrierDelayStats("EV", -180.0, -27.0, -80.0, -33.0),
                     CarrierDelayStats("US", -10.0, -10.0, -10.0, -10.0),
                     CarrierDelayStats("9E", -9.0, -9.0, -9.0, -9.0),
                     CarrierDelayStats("FL", -4.0, -4.0, -4.0, -4.0),
