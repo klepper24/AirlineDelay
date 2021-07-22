@@ -25,6 +25,37 @@ class AirlineDelaysReaderTest extends WordSpec with Matchers with DatasetSuiteBa
                     AirLineDelay("OO", "ABE", "ORD", 0.0),
                     AirLineDelay("EV", "ABE", "ATL", -27.0),
                     AirLineDelay("EV", "ABE", "ATL", -33.0),
+                    AirLineDelay("EV", "ABE", "ATL", -180.0),
+                    AirLineDelay("YV", "ABE", "ORD", -2.0),
+                    AirLineDelay("OO", "ABE", "ORD", -5.0),
+                    AirLineDelay("FL", "ABE", "MCO", -4.0),
+                    AirLineDelay("YV", "ABE", "ORD", -2.0),
+                    AirLineDelay("XE", "ABE", "CLE", 17.0),
+                    AirLineDelay("9E", "ABE", "DTW", -9.0)
+                )
+            )
+            val expectedDs = ds.toDF().as[AirLineDelay]
+
+            assertDatasetEquals(delays, expectedDs)
+        }
+
+        "read delays csv file with additional columns into dataset" in {
+            import spark.implicits._
+
+            // given
+            val path = this.getClass.getClassLoader.getResource("delays_with_cols.csv").getPath
+
+            // when
+            val delays: Dataset[AirLineDelay] = AirlineDelaysReader.read(path)(spark)
+
+            // then
+            val ds = sc.parallelize(
+                Seq(
+                    AirLineDelay("US", "ABE", "CLT", -10.0),
+                    AirLineDelay("OO", "ABE", "ORD", 0.0),
+                    AirLineDelay("EV", "ABE", "ATL", -27.0),
+                    AirLineDelay("EV", "ABE", "ATL", -33.0),
+                    AirLineDelay("EV", "ABE", "ATL", -180.0),
                     AirLineDelay("YV", "ABE", "ORD", -2.0),
                     AirLineDelay("OO", "ABE", "ORD", -5.0),
                     AirLineDelay("FL", "ABE", "MCO", -4.0),

@@ -22,6 +22,7 @@ object AirlineDelaysReader {
           .option("delimiter",";")
           .schema(customSchema)
           .csv(path)
+          .select($"OP_CARRIER", $"ORIGIN", $"DEST", $"ARR_DELAY")
           .withColumnRenamed("OP_CARRIER", "carrier")
           .withColumnRenamed("ORIGIN", "sourceAirport")
           .withColumnRenamed("DEST", "destinationAirport")
