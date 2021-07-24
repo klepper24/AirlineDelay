@@ -3,21 +3,21 @@ package sparktraining
 import com.holdenkarau.spark.testing.DatasetSuiteBase
 import org.apache.spark.sql.{Dataset, SparkSession}
 import org.scalatest.{Matchers, WordSpec}
-import sparktraining.model.{AirLineDelay, CarrierDelayStats}
+import sparktraining.model.{Flight, CarrierDelayStats}
 
-class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
+class FlightsAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
 
-    "AirLineDelayAggs" should {
+    "FlightAggs" should {
         "calculate top N carriers" in {
             implicit val sparkSession: SparkSession = spark
             import spark.implicits._
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[AirLineDelay] = AirlineDelaysReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read(path)
 
             // when
-            val top_n: Dataset[CarrierDelayStats] = AirLineDelayAggs.topNCarriers(input)(5, ascending = true)
+            val top_n: Dataset[CarrierDelayStats] = FlightsAggs.topNCarriers(input)(5, ascending = true)
 
             // then
             val ds = sc.parallelize(
@@ -41,10 +41,10 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[AirLineDelay] = AirlineDelaysReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read(path)
 
             // when
-            val top_n: Dataset[CarrierDelayStats] = AirLineDelayAggs.topNCarriers(input)(10, ascending = true)
+            val top_n: Dataset[CarrierDelayStats] = FlightsAggs.topNCarriers(input)(10, ascending = true)
 
             // then
             val ds = sc.parallelize(
@@ -70,10 +70,10 @@ class AirLineDelayAggsTest extends WordSpec with Matchers with DatasetSuiteBase 
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[AirLineDelay] = AirlineDelaysReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read(path)
 
             // when
-            val top_n: Dataset[CarrierDelayStats] = AirLineDelayAggs.topNCarriers(input)(2, ascending = false)
+            val top_n: Dataset[CarrierDelayStats] = FlightsAggs.topNCarriers(input)(2, ascending = false)
 
             // then
             val ds = sc.parallelize(

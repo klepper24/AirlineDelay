@@ -2,11 +2,11 @@ package sparktraining
 
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Dataset, SparkSession}
-import sparktraining.model.AirLineDelay
+import sparktraining.model.Flight
 
-object AirlineDelaysReader {
+object FlightsReader {
 
-    def read(path: String)(implicit spark: SparkSession): Dataset[AirLineDelay] = {
+    def read(path: String)(implicit spark: SparkSession): Dataset[Flight] = {
         import spark.implicits._
 
         val customSchema = StructType(Array(
@@ -27,7 +27,7 @@ object AirlineDelaysReader {
           .withColumnRenamed("ORIGIN", "sourceAirport")
           .withColumnRenamed("DEST", "destinationAirport")
           .withColumnRenamed("ARR_DELAY", "delay")
-          .as[AirLineDelay]
+          .as[Flight]
     }
 
 }

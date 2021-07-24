@@ -1,20 +1,20 @@
 package sparktraining
 
 import org.apache.spark.sql.{Dataset, SparkSession}
-import sparktraining.model.AirLineDelay
+import sparktraining.model.Flight
 
 object AppTraining extends App {
     val spark = SparkSession
       .builder()
-      .appName("AirlineDelay")
+      .appName("Flight")
       .getOrCreate()
 
     private implicit val sparkSession: SparkSession = spark
 
     val count = 10
-    val delays: Dataset[AirLineDelay] = AirlineDelaysReader.read(args(0))
+    val delays: Dataset[Flight] = FlightsReader.read(args(0))
 
-    val results = AirLineDelayAggs.topNCarriers(delays)(count, ascending = true)
+    val results = FlightsAggs.topNCarriers(delays)(count, ascending = true)
 
     results.write.csv(args(1))
 }

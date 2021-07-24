@@ -2,9 +2,9 @@ package sparktraining
 
 import org.apache.spark.sql.{Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
-import sparktraining.model.{AirLineDelay, CarrierDelayStats}
+import sparktraining.model.{Flight, CarrierDelayStats}
 
-object AirLineDelayAggs {
+object FlightsAggs {
 
     def getDelayMedian = (delayList: Seq[Double]) => {
       val count = delayList.size
@@ -20,7 +20,7 @@ object AirLineDelayAggs {
     val calculateMedian =  udf(getDelayMedian)
 
 
-    def topNCarriers(delays: Dataset[AirLineDelay])
+    def topNCarriers(delays: Dataset[Flight])
                     (n: Int, ascending: Boolean)
                     (implicit spark: SparkSession): Dataset[CarrierDelayStats] = {
         import spark.implicits._
