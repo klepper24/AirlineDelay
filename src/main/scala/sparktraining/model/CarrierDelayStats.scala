@@ -4,6 +4,5 @@ case class CarrierDelayStats(carrier: String,
                              minDelay: Double,
                              maxDelay: Double,
                              avgDelay: Double,
-                             medianDelay: Double
-                            )
+                             medianDelay: Double)
 
