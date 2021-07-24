@@ -26,7 +26,7 @@ class CarriersReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
                     Carrier("05Q", "Comlux Aviation, AG"),
                     Carrier("06Q", "Master Top Linhas Aereas Ltd."),
                     Carrier("07Q", "Flair Airlines Ltd."),
-                    Carrier("08Q", "Swift Air, LLC"),
+                    Carrier("09Q", "Swift Air, LLC"),
                     Carrier("0BQ", "DCA"),
                     Carrier("0CQ", "ACM AIR CHARTER GmbH"),
                     Carrier("0FQ", "Maine Aviation Aircraft Charter, LLC"),
@@ -34,7 +34,7 @@ class CarriersReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
                 )
             )
             val expectedDs = ds.toDF().as[Carrier]
-
+            carriers.show()
             assertDatasetEquals(carriers, expectedDs)
         }
 
