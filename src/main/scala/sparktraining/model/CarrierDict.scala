@@ -1,4 +1,4 @@
 package sparktraining.model
 
-case class Carrier(code: String,
+case class CarrierDict(code: String,
                    name: String)
