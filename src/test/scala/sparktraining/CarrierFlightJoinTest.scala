@@ -37,7 +37,8 @@ class CarrierFlightJoinTest extends WordSpec with Matchers with DatasetSuiteBase
         )
       )
       val expectedDs = ds.toDF().as[CarrierFlight]
-
+      expectedDs.show()
+      carrierFlights.show()
       assertDatasetEquals(carrierFlights, expectedDs)
     }
 
