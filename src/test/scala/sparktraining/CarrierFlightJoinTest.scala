@@ -18,7 +18,7 @@ class CarrierFlightJoinTest extends WordSpec with Matchers with DatasetSuiteBase
       // when
       val carrierDict: Dataset[CarrierDict] = CarriersReader.read(pathCarriers)(spark)
       val flights: Dataset[Flight] = FlightsReader.read(pathFlights)(spark)
-      val carrierFlights: Dataset[CarrierFlight] = CarrierDictFlightsJoin.joinFunc(carrierDict, flights)(spark)
+      val carrierFlights: Dataset[CarrierFlight] = CarrierDictFlightsJoin.join(carrierDict, flights)(spark)
 
       // then
       val ds = sc.parallelize(
@@ -52,7 +52,7 @@ class CarrierFlightJoinTest extends WordSpec with Matchers with DatasetSuiteBase
       val carrierDict: Dataset[CarrierDict] = CarriersReader.read(pathCarriers)(spark)
       val flights: Dataset[Flight] = FlightsReader.read(pathFlights)(spark)
       val aggFlights: Dataset[CarrierDelayStats] = FlightsAggs.topNCarriers(flights)(10, ascending = true)(spark)
-      val carrierFlights: Dataset[CarrierFlight] = CarrierDictFlightsJoin.joinFunc(carrierDict, aggFlights)(spark)
+      val carrierFlights: Dataset[CarrierNameDelayStats] = CarrierDictFlightsJoin.joinAgg(carrierDict, aggFlights)(spark)
 
       // then
       val ds = sc.parallelize(
