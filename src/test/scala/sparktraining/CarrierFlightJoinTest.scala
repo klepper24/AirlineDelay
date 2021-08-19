@@ -26,7 +26,7 @@ class CarrierFlightJoinTest extends WordSpec with Matchers with DatasetSuiteBase
         Seq(
             CarrierNameDelayStats("Atlantic Southeast Airlines", -180.0, -27.0, -80.0, -33.0),
             CarrierNameDelayStats("US Airways Inc. (Merged with America West 9/05. Reporting for both starting 10/07.)", -10.0, -10.0, -10.0, -10.0),
-            CarrierNameDelayStats("Pinnacle Airlines Inc.", -9.0, -9.0, -9.0, -9.0),
+            CarrierNameDelayStats("Unknown", -9.0, -9.0, -9.0, -9.0),
             CarrierNameDelayStats("AirTran Airways Corporation", -4.0, -4.0, -4.0, -4.0),
             CarrierNameDelayStats("Skywest Airlines Inc.", -5.0, 0.0, -2.5, -2.5),
             CarrierNameDelayStats("Mesa Airlines Inc.", -2.0, -2.0, -2.0, -2.0),

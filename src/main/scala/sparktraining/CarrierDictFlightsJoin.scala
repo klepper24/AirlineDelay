@@ -13,8 +13,9 @@ object CarrierDictFlightsJoin {
     delays
       .joinWith(dict,
         delays("carrier") === dict("code"),
-        "inner")
-      .map{ case (del, di) => CarrierNameDelayStats(di.name, del.minDelay, del.maxDelay, del.avgDelay, del.medianDelay) }
+        "left")
+      .map{ case (del, di) => if (di.name == null) CarrierNameDelayStats("Unknown", del.minDelay, del.maxDelay, del.avgDelay, del.medianDelay) else CarrierNameDelayStats(di.name, del.minDelay, del.maxDelay, del.avgDelay, del.medianDelay)
+      }
 
   }
 
