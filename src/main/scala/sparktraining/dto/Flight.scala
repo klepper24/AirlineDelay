@@ -1,4 +1,4 @@
-package sparktraining.model
+package sparktraining.dto
 
 case class Flight(carrier: String,
                   sourceAirport: String,

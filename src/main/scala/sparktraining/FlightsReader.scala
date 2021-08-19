@@ -2,7 +2,7 @@ package sparktraining
 
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{Dataset, SparkSession}
-import sparktraining.model.Flight
+import sparktraining.dto.Flight
 
 object FlightsReader {
 

@@ -3,7 +3,8 @@ package sparktraining
 import com.holdenkarau.spark.testing.DatasetSuiteBase
 import org.apache.spark.sql.Dataset
 import org.scalatest.{Matchers, WordSpec}
-import sparktraining.model.{Flight, CarrierDelayStats}
+import sparktraining.dto.Flight
+import sparktraining.model.CarrierDelayStats
 
 
 class FlightsReaderTest extends WordSpec with Matchers with DatasetSuiteBase {

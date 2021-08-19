@@ -2,11 +2,11 @@ package sparktraining
 
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{Dataset, SparkSession}
-import sparktraining.model.CarrierDict
+import sparktraining.dto.Carrier
 
 object CarriersReader {
 
-    def read(path: String)(implicit spark: SparkSession): Dataset[CarrierDict] = {
+    def read(path: String)(implicit spark: SparkSession): Dataset[Carrier] = {
             import spark.implicits._
 
             val customSchema = StructType(Array(
@@ -22,7 +22,7 @@ object CarriersReader {
               .csv(path)
               .withColumnRenamed("Code", "code")
               .withColumnRenamed("Description", "name")
-              .as[CarrierDict]
+              .as[Carrier]
         }
 
 }
