@@ -17,7 +17,7 @@ class FlightsApplicationTest extends WordSpec with Matchers with DatasetSuiteBas
       val carriers: Dataset[Carrier] = CarriersReader.read(pathCarriers)(spark)
 
       val pathFlights = this.getClass.getClassLoader.getResource("delays.csv").getPath
-      val flights: Dataset[Flight] = FlightsReader.read(pathFlights)(spark)
+      val flights: Dataset[Flight] = FlightsReader.read_old(pathFlights)(spark)
 
       // when
       val aggFlights: Dataset[CarrierDelayStats] = FlightsAggs.topNCarriers(flights, carriers)(10, ascending = true)(spark)

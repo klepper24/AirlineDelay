@@ -17,7 +17,7 @@ class FlightsReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
 
             // when
-            val delays: Dataset[Flight] = FlightsReader.read(path)(spark)
+            val delays: Dataset[Flight] = FlightsReader.read_old(path)(spark)
 
             // then
             val ds = sc.parallelize(
@@ -47,7 +47,7 @@ class FlightsReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
             val path = this.getClass.getClassLoader.getResource("delays_with_cols.csv").getPath
 
             // when
-            val delays: Dataset[Flight] = FlightsReader.read(path)(spark)
+            val delays: Dataset[Flight] = FlightsReader.read_old(path)(spark)
 
             // then
             val ds = sc.parallelize(
@@ -63,6 +63,35 @@ class FlightsReaderTest extends WordSpec with Matchers with DatasetSuiteBase {
                     Flight("YV", "ABE", "ORD", -2.0),
                     Flight("XE", "ABE", "CLE", 17.0),
                     Flight("9E", "ABE", "DTW", -9.0)
+                )
+            )
+            val expectedDs = ds.toDF().as[Flight]
+
+            assertDatasetEquals(delays, expectedDs)
+        }
+
+        "read real_delays csv file" in {
+            import spark.implicits._
+
+            // given
+            val path = this.getClass.getClassLoader.getResource("real_delays.csv").getPath
+
+            // when
+            val delays: Dataset[Flight] = FlightsReader.read(path)(spark)
+
+            // then
+            val ds = sc.parallelize(
+                Seq(
+                    Flight("XE", "DCA", "EWR", 4.0),
+                    Flight("XE", "EWR", "IAD", -8.0),
+                    Flight("XE", "EWR", "DCA", -9.0),
+                    Flight("XE", "DCA", "EWR", -12.0),
+                    Flight("XE", "IAD", "EWR", -38.0),
+                    Flight("XE", "ATL", "EWR", -19.0),
+                    Flight("XE", "CLE", "ATL", -17.0),
+                    Flight("XE", "DCA", "EWR", -8.0),
+                    Flight("XE", "EWR", "DCA", -15.0),
+                    Flight("XE", "EWR", "DCA", -12.0)
                 )
             )
             val expectedDs = ds.toDF().as[Flight]

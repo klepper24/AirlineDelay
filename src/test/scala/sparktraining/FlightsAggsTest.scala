@@ -16,7 +16,7 @@ class FlightsAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[Flight] = FlightsReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read_old(path)
             val carriers = spark.emptyDataset[Carrier]
 
             // when
@@ -44,7 +44,7 @@ class FlightsAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[Flight] = FlightsReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read_old(path)
             val carriers = spark.emptyDataset[Carrier]
 
             // when
@@ -74,7 +74,7 @@ class FlightsAggsTest extends WordSpec with Matchers with DatasetSuiteBase {
 
             // given
             val path = this.getClass.getClassLoader.getResource("delays.csv").getPath
-            val input: Dataset[Flight] = FlightsReader.read(path)
+            val input: Dataset[Flight] = FlightsReader.read_old(path)
             val carriers = spark.emptyDataset[Carrier]
 
             // when
