@@ -17,5 +17,5 @@ object FlightsApplication extends App {
 
     val results = FlightsAggs.topNCarriers(flights, carriers)(count, ascending = true)
 
-    results.write.csv(args(1))
+    results.write.csv(args(2))
 }
